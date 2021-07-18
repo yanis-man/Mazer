@@ -14,7 +14,7 @@
                     <label for="email-id-vertical">Plaque</label>
                     <input type="email" id="email-id-vertical"
                         class="form-control" name="email-id"
-                        placeholder="Email">
+                        placeholder="XX000WW">
                 </div>
             </div>
             <div class="col-12">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12" id="employeeList">
+            <div class="col-12" id="employeesList">
                 <div class="form-group">
                     <label for="first-name-vertical">Employé</label>
                     <select class="form-select" id="employeeList">
