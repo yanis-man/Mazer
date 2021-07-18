@@ -502,7 +502,7 @@
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                                role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                                role="tab" aria-controls="profile" aria-selected="false">Rôles</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
@@ -516,25 +516,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="profile" role="tabpanel"
                                             aria-labelledby="profile-tab">
-                                            Integer interdum diam eleifend metus lacinia, quis gravida eros mollis.
-                                            Fusce non sapien
-                                            sit amet magna dapibus
-                                            ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis
-                                            a mauris ex.
-                                            Ut finibus risus sed massa
-                                            mattis porta. Aliquam sagittis massa et purus efficitur ultricies. Integer
-                                            pretium dolor
-                                            at sapien laoreet ultricies.
-                                            Fusce congue et lorem id convallis. Nulla volutpat tellus nec molestie
-                                            finibus. In nec
-                                            odio tincidunt eros finibus
-                                            ullamcorper. Ut sodales, dui nec posuere finibus, nisl sem aliquam metus, eu
-                                            accumsan
-                                            lacus felis at odio. Sed lacus
-                                            quam, convallis quis condimentum ut, accumsan congue massa. Pellentesque et
-                                            quam vel
-                                            massa pretium ullamcorper vitae eu
-                                            tortor.
+                                            <?php include_once('./assets/components/Forms/fast_edit_roles.php') ?>
                                         </div>
                                         <div class="tab-pane fade" id="contact" role="tabpanel"
                                             aria-labelledby="contact-tab">
@@ -555,29 +537,26 @@
                             <div class="col-12 col-xl-8">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Latest Comments</h4>
+                                        <h4>Dernières candidatures</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-hover table-lg">
                                                 <thead>
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Comment</th>
+                                                        <th>Nom</th>
+                                                        <th>Détails</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <td class="col-3">
                                                             <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="assets/images/faces/5.jpg">
-                                                                </div>
                                                                 <p class="font-bold ms-3 mb-0">Si Cantik</p>
                                                             </div>
                                                         </td>
                                                         <td class="col-auto">
-                                                            <p class=" mb-0">Congratulations on your graduation!</p>
+                                                            <p class=" mb-0">Consulter la fiche</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
