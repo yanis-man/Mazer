@@ -506,7 +506,7 @@
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
-                                                role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                                role="tab" aria-controls="contact" aria-selected="false">Transactions</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
@@ -520,15 +520,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="contact" role="tabpanel"
                                             aria-labelledby="contact-tab">
-                                            <p class="mt-2">Duis ultrices purus non eros fermentum hendrerit. Aenean
-                                                ornare interdum
-                                                viverra. Sed ut odio velit. Aenean eu diam
-                                                dictum nibh rhoncus mattis quis ac risus. Vivamus eu congue ipsum.
-                                                Maecenas id
-                                                sollicitudin ex. Cras in ex vestibulum,
-                                                posuere orci at, sollicitudin purus. Morbi mollis elementum enim, in
-                                                cursus sem
-                                                placerat ut.</p>
+                                            <?php include_once('./assets/components/Forms/fast_add_transaction.php')?>
                                         </div>
                                     </div>
                                 </div>
