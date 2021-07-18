@@ -6,7 +6,7 @@ import {ApiURL} from '../CONFIG.js'
 $(function()
 {
     let doEmployeeAttributionHided = true;
-    $('#employeeList').hide();
+    $('#employeesList').hide();
     const userToken = localStorage.getItem('authToken');
     if(userToken)
     {
@@ -19,12 +19,12 @@ $(function()
     {
         if(doEmployeeAttributionHided)
         {
-            $('#employeeList').show();
+            $('#employeesList').show();
             doEmployeeAttributionHided = false
         }
         else
         {
-            $('#employeeList').hide();
+            $('#employeesList').hide();
             doEmployeeAttributionHided = true
         }
     })
@@ -43,7 +43,31 @@ $(function()
 
     employeeList.forEach(employee => {
         $("#employeeList").append(
-            new Option(employee['id'], employee['display_name'])
+            new Option(employee['display_name'], employee['id'])
         )
+        $("#roleEmployeeList").append(
+            new Option(employee['display_name'], employee['id'])
+        )
+
+    })
+
+    let roleList = get_url(ApiURL.COMMON_URL, "action=getRoleList")['data'];
+
+    roleList.forEach(role => {
+        $("#roleList").append(
+            new Option(role['display_name'], role['id'])
+        )
+
+    })
+
+    //Listen on employee switch in roles tab
+    $("#roleEmployeeList").on('change', function(e){
+        let value = $("#roleEmployeeList :selected").val()
+        if(value == 0)
+        {
+            return;
+        }
+        let role = get_url(ApiURL.COMMON_URL, "action=getUserRoles&userId="+value)['data'][0]['compagny_role_dsp'];
+        $("#actual-role").attr("placeholder", role);
     })
 })
