@@ -21,6 +21,14 @@ include_once('./common_function.php');
             {
                 retrieveRoleList();
             }
+            if($action == "getTransactionTypes")
+            {
+                retrieveTransactionTypes();
+            }
+            if($action == "registerVehicle")
+            {
+                
+            }
         }
     }
 ?>

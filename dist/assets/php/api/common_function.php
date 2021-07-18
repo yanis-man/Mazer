@@ -8,9 +8,23 @@ function initDB()
     return $db;
 }
 
-function sendAndEx($SQL, $params = array())
+/*
+TYPE
+- 0 : Pull from the db
+- 1 : Push to the db
+*/
+
+function sendAndEx($SQL, $params = array(), $type = 0)
 {
     $db = initDB();
+
+    if($type)
+    {
+        $db->push($SQL, $params);
+        header('Content-Type: application/json');
+        echo json_encode(['status'=> 'ok']);
+    }
+
     $result = $db->pull($SQL, $params);
 
     header('Content-Type: application/json');
@@ -54,4 +68,14 @@ function retrieveRoleList()
     sendAndEx($SQL);
 }
 
+function retrieveTransactionTypes()
+{
+    $SQL = "SELECT * FROM transaction_types";
+    sendAndEx($SQL);
+}
+
+function addVehicle($_POST)
+{
+    
+}
 ?>
