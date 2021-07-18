@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label for="first-name-vertical">Concerné</label>
                         <select class="form-select" id="roleEmployeeList">
-                            <option value="0">Sélectionner un employé</option>
+                            <option value="0" disabled>Sélectionner un employé</option>
                         </select>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <label for="email-id-vertical">Nouveau rôle</label>
                     <select class="form-select" id="roleList">
-                            <option value="0">Sélectionner un rôle</option>
+                            <option value="0" disabled>Sélectionner un rôle</option>
                         </select>
                 </div>
             </div>
