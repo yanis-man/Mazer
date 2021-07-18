@@ -13,6 +13,14 @@ include_once('./common_function.php');
             {
                 retrieveEmployeeList();
             }
+            if($action == "getUserRoles")
+            {
+                retrieveUserRole($_POST['userId']);
+            }
+            if($action == "getRoleList")
+            {
+                retrieveRoleList();
+            }
         }
     }
 ?>
