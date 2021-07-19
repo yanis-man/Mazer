@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -495,35 +496,35 @@
                                         <h4>Raccourcis</h4>
                                     </div>
                                     <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
-                                                role="tab" aria-controls="home" aria-selected="true">Véhicules</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                                role="tab" aria-controls="profile" aria-selected="false">Rôles</a>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
-                                                role="tab" aria-controls="contact" aria-selected="false">Transactions</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                            aria-labelledby="home-tab">
-                                            <?php include_once("./assets/components/Forms/fast_add_vehicle.php") ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="profile" role="tabpanel"
-                                            aria-labelledby="profile-tab">
-                                            <?php include_once('./assets/components/Forms/fast_edit_roles.php') ?>
-                                        </div>
-                                        <div class="tab-pane fade" id="contact" role="tabpanel"
-                                            aria-labelledby="contact-tab">
-                                            <?php include_once('./assets/components/Forms/fast_add_transaction.php')?>
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
+                                                    role="tab" aria-controls="home" aria-selected="true">Véhicules</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
+                                                    role="tab" aria-controls="profile" aria-selected="false">Rôles</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact"
+                                                    role="tab" aria-controls="contact" aria-selected="false">Transactions</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                                aria-labelledby="home-tab">
+                                                <?php include_once("./assets/components/Forms/fast_add_vehicle.php") ?>
+                                            </div>
+                                            <div class="tab-pane fade" id="profile" role="tabpanel"
+                                                aria-labelledby="profile-tab">
+                                                <?php include_once('./assets/components/Forms/fast_edit_roles.php') ?>
+                                            </div>
+                                            <div class="tab-pane fade" id="contact" role="tabpanel"
+                                                aria-labelledby="contact-tab">
+                                                <?php include_once('./assets/components/Forms/fast_add_transaction.php')?>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                             <div class="col-12 col-xl-8">
@@ -685,8 +686,10 @@
 
     <!-- Js Module -->
     <script src="assets/js/scripts/Models/User.js" type="module"></script>
+    <script src="assets/js/scripts/Notifications/Notifications.js" type="module"></script>
 
     <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendors/toastify/toastify.js"></script>
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
