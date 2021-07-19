@@ -1,11 +1,11 @@
 <br>
-<form class="form form-vertical">
+<form class="form form-vertical" id="editRole">
     <div class="form-body">
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
                     <label for="first-name-vertical">Concerné</label>
-                        <select class="form-select" id="roleEmployeeList">
+                        <select class="form-select" id="roleEmployeeList" name="employeeSelected">
                             <option value="0" disabled>Sélectionner un employé</option>
                         </select>
                 </div>
@@ -21,7 +21,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <label for="email-id-vertical">Nouveau rôle</label>
-                    <select class="form-select" id="roleList">
+                    <select class="form-select" id="roleList" name="roleSelected">
                             <option value="0" disabled>Sélectionner un rôle</option>
                         </select>
                 </div>
