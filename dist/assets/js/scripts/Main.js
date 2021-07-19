@@ -3,6 +3,8 @@ import {get_url} from './utils.js'
 
 import {ApiURL} from '../CONFIG.js'
 
+import {Notification, NotificationTypes} from './Notifications/Notifications.js'
+
 $(function()
 {
     let doEmployeeAttributionHided = true;
@@ -95,6 +97,46 @@ $(function()
         else
         {
             $("#setReccurrentTransaction").show()
+        }
+    })
+
+    //Shortcuts form treatement
+    $("#registerNewVehicle").on('submit', function(e)
+    {
+        e.preventDefault();
+
+        let newVehicleData = $(this).serialize();
+        let vehicleName = $("#vehicleType :selected").text();
+
+        const response = get_url(ApiURL.COMMON_URL, newVehicleData+"&action=registerVehicle");
+        if(response['status'] == 'ok')
+        {
+            new Notification(`Votre ${vehicleName} a bien été enregistré`, new NotificationTypes().Success)
+            $(this)[0].reset();
+        }
+    })
+
+    $("#editRole").on('submit', function(e){
+        e.preventDefault();
+
+        const roleData = $(this).serialize();
+        const response = get_url(ApiURL.COMMON_URL, roleData+"&action=editRole");
+        if(response['status'] == 'ok')
+        {
+            new Notification(`Fait`, new NotificationTypes().Success)
+            $(this)[0].reset();
+        }
+    })
+
+    $("#registerTransaction").on('submit', function(e)
+    {
+        e.preventDefault();
+        const transactionData = $(this).serialize();
+        const response = get_url(ApiURL.COMMON_URL, transactionData+"&action=registerNewTransaction");
+        if(response['status'] == 'ok')
+        {
+            new Notification(`Transaction ajoutée`, new NotificationTypes().Success)
+            $(this)[0].reset();
         }
     })
 })

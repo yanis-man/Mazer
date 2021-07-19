@@ -5,29 +5,32 @@ include_once('./common_function.php');
         if(isset($_POST['action']))
         {
             $action = $_POST['action'];
-            if($action == 'getVehiclesTypes')
+            switch($action)
             {
-                retrieveVehiclesType();
-            }
-            if($action == 'getEmployeeList')
-            {
-                retrieveEmployeeList();
-            }
-            if($action == "getUserRoles")
-            {
-                retrieveUserRole($_POST['userId']);
-            }
-            if($action == "getRoleList")
-            {
-                retrieveRoleList();
-            }
-            if($action == "getTransactionTypes")
-            {
-                retrieveTransactionTypes();
-            }
-            if($action == "registerVehicle")
-            {
-                
+                case "getVehiclesTypes":
+                    retrieveVehiclesType();
+                    break;
+                case "getEmployeeList":
+                    retrieveEmployeeList();
+                    break;
+                case "getUserRoles":
+                    retrieveUserRole($_POST['userId']);
+                    break;
+                case "getRoleList":
+                    retrieveRoleList();
+                    break;
+                case "getTransactionTypes":
+                    retrieveTransactionTypes();
+                    break;
+                case "registerVehicle":
+                    registerNewVehicle($_POST);
+                    break;
+                case "editRole":
+                    updateUserRole($_POST);
+                    break;
+                case "registerNewTransaction":
+                    registerNewTransaction($_POST);
+                    break;
             }
         }
     }

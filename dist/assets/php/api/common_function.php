@@ -14,13 +14,15 @@ TYPE
 - 1 : Push to the db
 */
 
-function sendAndEx($SQL, $params = array(), $type = 0)
+function sendAndEx($SQL, $params = array(), $type = false)
 {
     $db = initDB();
 
     if($type)
     {
+        $params = $db->sanitize($params);
         $db->push($SQL, $params);
+
         header('Content-Type: application/json');
         echo json_encode(['status'=> 'ok']);
     }
@@ -74,8 +76,39 @@ function retrieveTransactionTypes()
     sendAndEx($SQL);
 }
 
-function addVehicle($_POST)
+function registerNewVehicle($data)
 {
+    $SQL = "INSERT INTO vehicles
+    (vehicles.plate, vehicles.type, vehicles.driver)
+    VALUES
+    (?, ?, ?)";
+    if(!isset($data['setToAnEmployee']))
+    {
+        $data['employeeList'] = null;
+    }
+    sendAndEx($SQL, array($data['vehiclePlate'], $data['vehicleType'], $data['employeeList']), true);
+    return;
+}
+
+function updateUserRole($data)
+{
+    $SQL = "UPDATE users
+    SET users.compagny_role = ?
+    WHERE users.id = ?";
+
+    sendAndEx($SQL, array($data['roleSelected'], $data['employeeSelected']));
+}
+
+function registerNewTransaction($data)
+{
+    $SQL = "INSERT INTO transactions
+    (transactions.destionation, transactions.amount, transactions.label, transactions.type)
+    VALUES
+    (?,?,?,?)";
     
+    $SQL = "INSERT INTO recurrent_bill
+    (recurrent_bill.type, recurrent_bill.amount, recurrent_bill.registering_date, recurrent_bill.comment)
+    VALUES
+    (?, ?, ?, ?);";
 }
 ?>
