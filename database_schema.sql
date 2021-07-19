@@ -52,7 +52,7 @@ CREATE TABLE `Run_state`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `display_name` TEXT NOT NULL
 );
-CREATE TABLE `Transaction`(
+CREATE TABLE `Transactions`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `destination` INT NOT NULL,
     `amount` INT NOT NULL,
