@@ -31,6 +31,9 @@ include_once('./common_function.php');
                 case "registerNewTransaction":
                     registerNewTransaction($_POST);
                     break;
+                case "retrieveWaitingRuns":
+                    retrieveWaitingRuns();
+                    break;
             }
         }
     }

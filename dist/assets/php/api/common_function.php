@@ -25,6 +25,7 @@ function sendAndEx($SQL, $params = array(), $type = false)
 
         header('Content-Type: application/json');
         echo json_encode(['status'=> 'ok']);
+        return;
     }
 
     $result = $db->pull($SQL, $params);
@@ -110,5 +111,28 @@ function registerNewTransaction($data)
     (recurrent_bill.type, recurrent_bill.amount, recurrent_bill.registering_date, recurrent_bill.comment)
     VALUES
     (?, ?, ?, ?);";
+}
+
+function retrieveWaitingRuns()
+{
+    $SQL = " SELECT 
+    runs.id AS run_id, 
+    runs.driver, runs.date, runs.vehicle, runs.amount, runs.proof, runs.state, runs.comment,
+
+    users.display_name AS driver_name, 
+
+    vehicles.plate,
+
+    vehicles_types.display_name AS vehicle_name
+    FROM runs
+
+    INNER JOIN users ON users.id = runs.driver
+    INNER JOIN vehicles ON vehicles.id = runs.vehicle 
+    INNER JOIN vehicles_types ON vehicles_types.id = vehicle
+
+    WHERE runs.state = 3;
+    ";
+
+    sendAndEx($SQL);
 }
 ?>
