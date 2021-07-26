@@ -190,6 +190,16 @@ $(function()
         }
     })
 
+    //Update the transactions history
+    let last5Transac = get_url(ApiURL.COMMON_URL, "action=retrieveTransactionsHist")['data'].slice(0, 4)
+
+    last5Transac.forEach(transac => {
+        $("#last5transactions").append(
+            `<tr> <td class="text-bold-500">${transac['destination']}</td>`+
+            `<td class="text-bold-500">${(transac['type'] == "1" ? "+" : "-")+"$"+transac['amount']}</td>`+
+            `<td class="text-bold-500">${transac['registering_date']}</td></tr>`
+        )
+    })
 
 
 

@@ -34,6 +34,9 @@ include_once('./common_function.php');
                 case "retrieveWaitingRuns":
                     retrieveWaitingRuns();
                     break;
+                case "retrieveTransactionsHist":
+                    retrieveTransacHist();
+                    break;
             }
         }
     }

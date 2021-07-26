@@ -241,7 +241,7 @@
                             </div>
                             <div class="card-content pb-4">
                             <div class="table-responsive">
-                                        <table class="table mb-0 table-lg">
+                                        <table class="table mb-0 table-lg" id="last5transactions">
                                             <thead>
                                                 <tr>
                                                     <th>Destinataire</th>
@@ -250,36 +250,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-bold-500">24555</td>
-                                                    <td>+$15</td>
-                                                    <td class="text-bold-500">21/07</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Morgan Vanblum</td>
-                                                    <td>$13/hr</td>
-                                                    <td class="text-bold-500">Graphic concepts</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Tiffani Blogz</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Ashley Boul</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-bold-500">Mikkey Mice</td>
-                                                    <td>$15/hr</td>
-                                                    <td class="text-bold-500">Animation</td>
-
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>

@@ -156,4 +156,10 @@ function retrieveWaitingRuns()
 
     sendAndEx($SQL);
 }
+
+function retrieveTransacHist()
+{
+    $SQL = "SELECT * FROM transactions";
+    sendAndEx($SQL);
+}
 ?>
