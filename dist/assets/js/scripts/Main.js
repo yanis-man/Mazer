@@ -29,7 +29,6 @@ $(function()
 
     //Load all runs which needs to be validated
     const waitingRuns = get_url(ApiURL.COMMON_URL, "action=retrieveWaitingRuns")['data'];
-    console.log(waitingRuns);
 
     waitingRuns.forEach(run =>{
         $("#waitingRunsTable").append(
@@ -63,7 +62,8 @@ $(function()
             `Type : ${run['vehicle_name']} <br/>`+
             `Plaque : ${run['plate']} <br>`+
             '<strong>Commentaire</strong><br/>'+
-            `${(run['comment'] ? run['comment'] : "Aucun")}`
+            `${(run['comment'] ? run['comment'] : "Aucun")} <br/>`+
+            `<strong>Lié à la semaine n°${run['week_num']}</strong><br/>`
             )
         detailsModal.display()
     })
@@ -137,7 +137,6 @@ $(function()
     $("#transactionTypeList").on('change', function(e)
     {
         let value = $("#transactionTypeList :selected").val()
-        console.log(value)
         if(value == 0 || value == 1)
         {
             $("#setReccurrentTransaction").hide()
@@ -176,7 +175,7 @@ $(function()
             $(this)[0].reset();
         }
     })
-
+    //Add a transaction to the history
     $("#registerTransaction").on('submit', function(e)
     {
         e.preventDefault();
@@ -188,6 +187,9 @@ $(function()
             $(this)[0].reset();
         }
     })
+
+
+
 
 
 })
