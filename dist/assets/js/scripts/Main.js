@@ -46,7 +46,7 @@ $(function()
                     `<button class="btn btn-success btn-sm icon" class="run-validation"><i class="fa fa-check" id="sendCorectRun"></i></button>`+
                     `<button class="btn btn-danger btn-sm icon"><i class="fa fa-times" id="rejectInvalidRun"></i></button>`+
                 `</td> <td>`+
-                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="" id="seeRunProofNDetails">`+
+                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#details${run['run_id']}" id="seeDetails">`+
                         `<i class="fa fa-eye"></i>`+
                     `</button>`+
                 `</td></tr>`
@@ -55,6 +55,17 @@ $(function()
         proofmodal.updateId(`run${run['run_id']}`)
         proofmodal.addImage(run['proof'])
         proofmodal.display()
+
+        let detailsModal = new Modal(document, "modal-destination", "Détails du trajet");
+        detailsModal.updateId(`details${run['run_id']}`)
+        detailsModal.addText(
+            '<strong>Informations du véhicule</strong><br/>'+
+            `Type : ${run['vehicle_name']} <br/>`+
+            `Plaque : ${run['plate']} <br>`+
+            '<strong>Commentaire</strong><br/>'+
+            `${(run['comment'] ? run['comment'] : "Aucun")}`
+            )
+        detailsModal.display()
     })
     //detect if the radio is checked to display employee list
     $("#setToAnEmployee").on('change', function(e)
