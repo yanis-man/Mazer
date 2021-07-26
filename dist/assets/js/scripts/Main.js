@@ -1,5 +1,7 @@
 import User from './Models/User.js'
+import Modal from './Models/Modal/Modal.js'
 import {get_url} from './utils.js'
+
 
 import {ApiURL} from '../CONFIG.js'
 
@@ -7,6 +9,7 @@ import {Notification, NotificationTypes} from './Notifications/Notifications.js'
 
 $(function()
 {
+    //Useful variables
     let doEmployeeAttributionHided = true;
     $('#employeesList').hide();
     $("#setReccurrentTransaction").hide();
@@ -19,6 +22,41 @@ $(function()
         document.User = new User(data);
         document.User.update_display(document);
     }
+    else
+    {
+        //redirect to the login page
+    }
+
+    //Load all runs which needs to be validated
+    const waitingRuns = get_url(ApiURL.COMMON_URL, "action=retrieveWaitingRuns")['data'];
+    console.log(waitingRuns);
+
+    waitingRuns.forEach(run =>{
+        $("#waitingRunsTable").append(
+            `<tr id="${run['run_id']}">`+
+                `<td>${run['run_id']}</td>`+
+                `<td>${run['driver_name']}</td>`+
+                `<td>${run['amount']}</td>`+
+                `<td>${run['date']}</td>`+
+                `<td>`+
+                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#run${run['run_id']}" id="seeRunProofNDetails">`+
+                        `<i class="fa fa-eye"></i>`+
+                    `</button>`+
+                `</td><td>`+
+                    `<button class="btn btn-success btn-sm icon" class="run-validation"><i class="fa fa-check" id="sendCorectRun"></i></button>`+
+                    `<button class="btn btn-danger btn-sm icon"><i class="fa fa-times" id="rejectInvalidRun"></i></button>`+
+                `</td> <td>`+
+                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="" id="seeRunProofNDetails">`+
+                        `<i class="fa fa-eye"></i>`+
+                    `</button>`+
+                `</td></tr>`
+        )
+        let proofmodal = new Modal(document, "modal-destination","Preuve du trajet");
+        proofmodal.updateId(`run${run['run_id']}`)
+        proofmodal.addImage(run['proof'])
+        proofmodal.display()
+    })
+    //detect if the radio is checked to display employee list
     $("#setToAnEmployee").on('change', function(e)
     {
         if(doEmployeeAttributionHided)
@@ -139,4 +177,6 @@ $(function()
             $(this)[0].reset();
         }
     })
+
+
 })
