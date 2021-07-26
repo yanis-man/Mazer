@@ -8,10 +8,20 @@ function initDB()
     return $db;
 }
 
+function returnDate()
+{
+    return strval(date('d/m/y'));
+}
+
+function returnWeekNum()
+{
+    return date("W");
+}
+
 /*
 TYPE
-- 0 : Pull from the db
-- 1 : Push to the db
+- False : Pull from the db
+- True : Push to the db
 */
 
 function sendAndEx($SQL, $params = array(), $type = false)
@@ -102,22 +112,33 @@ function updateUserRole($data)
 
 function registerNewTransaction($data)
 {
-    $SQL = "INSERT INTO transactions
-    (transactions.destionation, transactions.amount, transactions.label, transactions.type)
-    VALUES
-    (?,?,?,?)";
-    
-    $SQL = "INSERT INTO recurrent_bill
-    (recurrent_bill.type, recurrent_bill.amount, recurrent_bill.registering_date, recurrent_bill.comment)
-    VALUES
-    (?, ?, ?, ?);";
+    $date = returnDate();
+    $week = returnWeekNum();
+    if(!isset($data['setAsRecurrent']))
+    {
+        $SQL = "INSERT INTO transactions
+        (transactions.destination, transactions.amount, transactions.label, transactions.type, transactions.registering_date, transactions.week_num)
+        VALUES
+        (?,?,?,?,?,?)";
+
+        sendAndEx($SQL, array($data['destination'], $data['amount'], $data['label'], $data['transactionType'], $date, $week), true);
+    }
+    else
+    {
+        $SQL = "INSERT INTO recurrent_bill
+        (recurrent_bill.type, recurrent_bill.amount, recurrent_bill.registering_date, recurrent_bill.comment)
+        VALUES
+        (?, ?, ?, ?);";
+
+        sendAndEx($SQL, array($data['transactionType'], $data['amount'], $date, $data['label']), true);
+    }
 }
 
 function retrieveWaitingRuns()
 {
     $SQL = " SELECT 
     runs.id AS run_id, 
-    runs.driver, runs.date, runs.vehicle, runs.amount, runs.proof, runs.state, runs.comment,
+    runs.driver, runs.date, runs.vehicle, runs.amount, runs.proof, runs.state, runs.comment, runs.week_num,
 
     users.display_name AS driver_name, 
 
