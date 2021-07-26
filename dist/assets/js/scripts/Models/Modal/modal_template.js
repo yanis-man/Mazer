@@ -9,16 +9,11 @@ const MODAL_TEMPLATE = '<div class="modal fade text-left modal-borderless"tabind
                 '</button>'+
             '</div>'+
             '<div class="modal-body">'+
-                '<!-- <img id="proofImg" src="https://media.discordapp.net/attachments/804273539699834930/865650698422714378/unknown.png?width=732&height=412">-->'+
             '</div>'+
             '<div class="modal-footer">'+
                 '<button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">'+
                     '<i class="bx bx-x d-block d-sm-none"></i>'+
                     '<span class="d-none d-sm-block">Fermer</span>'+
-                '</button>'+
-                '<button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal" class="run_validation">'+
-                    '<i class="bx bx-check d-block d-sm-none"></i>'+
-                    '<span class="d-none d-sm-block">Accepter</span>'+
                 '</button>'+
             '</div>'+
         '</div>'+
