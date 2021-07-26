@@ -50,11 +50,13 @@ $(function()
                     `</button>`+
                 `</td></tr>`
         )
+        //Generating modal used to display the run's proof.
         let proofmodal = new Modal(document, "modal-destination","Preuve du trajet");
         proofmodal.updateId(`run${run['run_id']}`)
         proofmodal.addImage(run['proof'])
         proofmodal.display()
-
+        
+        //Generate modal for run's details
         let detailsModal = new Modal(document, "modal-destination", "Détails du trajet");
         detailsModal.updateId(`details${run['run_id']}`)
         detailsModal.addText(
