@@ -46,6 +46,7 @@ CREATE TABLE `Runs`(
     `amount` INT NOT NULL,
     `proof` TEXT NOT NULL,
     `state` INT NOT NULL,
+    `week_num` INT NOT NULL,
     `comment` TEXT NULL
 );
 CREATE TABLE `Run_state`(
@@ -57,7 +58,9 @@ CREATE TABLE `Transactions`(
     `destination` INT NOT NULL,
     `amount` INT NOT NULL,
     `label` TEXT NOT NULL,
-    `type` INT NOT NULL
+    `type` INT NOT NULL,
+    `registering_date` TEXT NOT NULL,
+    `week_num` INT NOT NULL,
 );
 CREATE TABLE `Transaction_types`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
