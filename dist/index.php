@@ -92,7 +92,7 @@
                             <section class="section">
                                 <div class="card">
                                     <div class="card-header">
-                                        Simple Datatable
+                                        Trajets en attente
                                     </div>
                                     <div class="card-body">
                                         <table class="table table-striped" id="waitingRunsTable">
