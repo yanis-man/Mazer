@@ -1,6 +1,6 @@
 import User from './Models/User.js'
 import Modal from './Models/Modal/Modal.js'
-import {get_url} from './utils.js'
+import {get_url, getNumberOfWeek} from './utils.js'
 
 
 import {ApiURL} from '../CONFIG.js'
@@ -13,6 +13,8 @@ $(function()
     let doEmployeeAttributionHided = true;
     $('#employeesList').hide();
     $("#setReccurrentTransaction").hide();
+        
+    $("#weekNum").html(getNumberOfWeek());
 
     const userToken = localStorage.getItem('authToken');
     if(userToken)
@@ -42,8 +44,8 @@ $(function()
                         `<i class="fa fa-eye"></i>`+
                     `</button>`+
                 `</td><td>`+
-                    `<button class="btn btn-success btn-sm icon" class="run-validation"><i class="fa fa-check" id="sendCorectRun"></i></button>`+
-                    `<button class="btn btn-danger btn-sm icon"><i class="fa fa-times" id="rejectInvalidRun"></i></button>`+
+                    `<button class="btn btn-success btn-sm icon" id="sendCorrectRun"><i class="fa fa-check"></i></button>`+
+                    `<button class="btn btn-danger btn-sm icon" id="rejectInvalidRun"><i class="fa fa-times"></i></button>`+
                 `</td> <td>`+
                     `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#details${run['run_id']}" id="seeDetails">`+
                         `<i class="fa fa-eye"></i>`+
@@ -192,7 +194,6 @@ $(function()
 
     //Update the transactions history
     let last5Transac = get_url(ApiURL.COMMON_URL, "action=retrieveTransactionsHist")['data'].slice(0, 4)
-
     last5Transac.forEach(transac => {
         $("#last5transactions").append(
             `<tr> <td class="text-bold-500">${transac['destination']}</td>`+
@@ -201,7 +202,22 @@ $(function()
         )
     })
 
+    $("tr #sendCorrectRun").on('click', function(e){
+        const rowId = $(this).closest("tr").attr("id")
 
+        const result = get_url(ApiURL.COMMON_URL, `newStatus=1&runId=${rowId}&action=updateRunStatus`)['status'];
+        if(result == "ok")
+        {
+            new Notification("Le trajet a été valdié", new NotificationTypes().Success)
+            $(this).closest('tr').remove()
+
+        }
+    })
+    $("tr #sendCorrectRun").on('click', function(e){
+        const rowId = $(this).closest("tr").attr("id")
+
+        //get_url(ApiURL.COMMON_URL, `newStatus=1&runId=${rowId}&action=updateRunStatus`);
+    })
 
 
 })
