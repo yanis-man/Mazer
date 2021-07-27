@@ -61,12 +61,12 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="stats-icon blue">
-                                                    <i class="iconly-boldProfile"></i>
+                                                    <i class="fas fa-calendar-week"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <h6 class="text-muted font-semibold">En service</h6>
-                                                <h6 class="font-extrabold mb-0">14 Employés</h6>
+                                                <h6 class="text-muted font-semibold">N° de semaine</h6>
+                                                <h6 class="font-extrabold mb-0" id="weekNum"></h6>
                                             </div>
                                         </div>
                                     </div>
