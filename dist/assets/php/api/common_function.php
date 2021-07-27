@@ -162,4 +162,14 @@ function retrieveTransacHist()
     $SQL = "SELECT * FROM transactions";
     sendAndEx($SQL);
 }
+
+function updateRunStatus($data)
+{
+    $SQL = "UPDATE runs SET runs.state = ? WHERE runs.id = ?";
+    $params = array(
+        $data['newStatus'], 
+        $data['runId']
+    );
+    sendAndEx($SQL, $params);
+}
 ?>

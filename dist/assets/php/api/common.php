@@ -37,6 +37,9 @@ include_once('./common_function.php');
                 case "retrieveTransactionsHist":
                     retrieveTransacHist();
                     break;
+                case "updateRunStatus":
+                    updateRunStatus($_POST);
+                    break;
             }
         }
     }
