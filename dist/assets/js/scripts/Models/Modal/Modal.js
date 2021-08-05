@@ -17,17 +17,39 @@ class Modal
         this.title = title;
         this.html.querySelector('.modal-title').innerHTML = this.title
     }
+    _updateBody(newElement)
+    {
+        this.html.querySelector("div.modal-body").append(newElement);
+    }
+    
     addImage(imageUrl)
     {
         let img = this.document.createElement("img")
         img.src = imageUrl
-        this.html.querySelector("div.modal-body").append(img)
+        this._updateBody(img)
     }
     addText(text)
     {
         let paragraph = this.document.createElement("p")
         paragraph.innerHTML = text
-        this.html.querySelector("div.modal-body").append(paragraph)
+        this._updateBody(paragraph)
+    }
+    addFormField(fieldName, fieldType)
+    {
+        let newField = this.document.createElement("input")
+        newField.setAttribute("type", fieldType);
+        newField.setAttribute("id", fieldName);
+        newField.setAttribute("class", "form-control");
+        this._updateBody(newField)
+    }
+    addAction(actionDisplayName, actionId)
+    {
+        let newAction = this.document.createElement("button")
+        newAction.innerHTML = actionDisplayName
+        newAction.setAttribute("id", actionId)
+        newAction.setAttribute("class", "btn btn-primary")
+        newAction.setAttribute("data-bs-dismiss", "modal")
+        this.html.querySelector("div.modal-footer").append(newAction);
     }
     updateId(newId)
     {
