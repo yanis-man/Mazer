@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/bootstrap.css">
 
+    
+
     <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
@@ -23,7 +25,7 @@
 
 <body>
     <div id="app">
-        <?php include("./assets/components/navbar.php"); ?>
+        <?php include("assets/components/navbar.php"); ?>
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -33,6 +35,7 @@
 
             <div class="page-heading">
                 <h3>Profile Statistics</h3>
+                <div class="alert alert-danger">Le site est en version de test, quelques bugs subsistent.</div>
             </div>
             <div class="page-content">
                 <section class="row">
@@ -120,7 +123,7 @@
                                                     </td>
                                                     <td>
                                                         <button class="btn btn-success btn-sm icon" class="run-validation"><i class="fa fa-check" id="sendCorectRun"></i></button>
-                                                        <button class="btn btn-danger btn-sm icon"><i class="fa fa-times" id="rejectInvalidRun"></i></button>
+                                                        <button class="btn btn-danger btn-sm icon" data-bs-toggle="modal" data-bs-target="#rejectionModal"><i class="fa fa-times" id="rejectInvalidRun"></i></button>
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#border-less" id="seeRunProofNDetails">
@@ -159,15 +162,15 @@
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                                 aria-labelledby="home-tab">
-                                                <?php include_once("./assets/components/Forms/fast_add_vehicle.php") ?>
+                                                <?php include_once("assets/components/Forms/fast_add_vehicle.php") ?>
                                             </div>
                                             <div class="tab-pane fade" id="profile" role="tabpanel"
                                                 aria-labelledby="profile-tab">
-                                                <?php include_once('./assets/components/Forms/fast_edit_roles.php') ?>
+                                                <?php include_once('assets/components/Forms/fast_edit_roles.php') ?>
                                             </div>
                                             <div class="tab-pane fade" id="contact" role="tabpanel"
                                                 aria-labelledby="contact-tab">
-                                                <?php include_once('./assets/components/Forms/fast_add_transaction.php')?>
+                                                <?php include_once('assets/components/Forms/fast_add_transaction.php')?>
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +292,7 @@
     </div>
 
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
     <script src="assets/js/pages/dashboard.js"></script>
 
@@ -298,6 +301,7 @@
 
     <!-- Custom JS -->
     <script src="assets/js/scripts/Main.js" type="module"></script>
+    <script src="assets/js/scripts/utils.js" type="module"></script>
 
     <!-- Js Module -->
     <script src="assets/js/scripts/Models/User.js" type="module"></script>
@@ -309,7 +313,7 @@
     <script src="assets/vendors/toastify/toastify.js"></script>
     <script>
         // Simple Datatable
-        let table1 = document.querySelector('#table1');
+        let table1 = document.querySelector('#waitingRunsTable');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
 </body>
