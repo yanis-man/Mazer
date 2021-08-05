@@ -13,7 +13,16 @@ $(function()
     let doEmployeeAttributionHided = true;
     $('#employeesList').hide();
     $("#setReccurrentTransaction").hide();
-        
+    
+
+    //Generate a modal for the rejection function
+    const rejectionModal = new Modal(document, "modal-destination", "Informations de rejet")
+    rejectionModal.updateId("rejectionModal")
+    rejectionModal.addText("Raisons du refus")
+    rejectionModal.addFormField("rejectionCom", "text")
+    rejectionModal.addAction("Valider", "validateReject")
+    rejectionModal.display()
+
     $("#weekNum").html(getNumberOfWeek());
 
     const userToken = localStorage.getItem('authToken');
@@ -31,7 +40,6 @@ $(function()
 
     //Load all runs which needs to be validated
     const waitingRuns = get_url(ApiURL.COMMON_URL, "action=retrieveWaitingRuns")['data'];
-
     waitingRuns.forEach(run =>{
         $("#waitingRunsTable").append(
             `<tr id="${run['run_id']}">`+
@@ -45,9 +53,9 @@ $(function()
                     `</button>`+
                 `</td><td>`+
                     `<button class="btn btn-success btn-sm icon" id="sendCorrectRun"><i class="fa fa-check"></i></button>`+
-                    `<button class="btn btn-danger btn-sm icon" id="rejectInvalidRun"><i class="fa fa-times"></i></button>`+
+                    `<button class="btn btn-danger btn-sm icon" id="rejectInvalidRun" data-bs-toggle="modal" data-bs-target="#rejectionModal"><i class="fa fa-times"></i></button>`+
                 `</td> <td>`+
-                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#details${run['run_id']}" id="seeDetails">`+
+                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#details${run['run_id']}" id="seeDetails">`+
                         `<i class="fa fa-eye"></i>`+
                     `</button>`+
                 `</td></tr>`
@@ -208,15 +216,34 @@ $(function()
         const result = get_url(ApiURL.COMMON_URL, `newStatus=1&runId=${rowId}&action=updateRunStatus`)['status'];
         if(result == "ok")
         {
-            new Notification("Le trajet a été valdié", new NotificationTypes().Success)
+            new Notification("Le trajet a été validé", new NotificationTypes().Success)
             $(this).closest('tr').remove()
 
         }
     })
-    $("tr #sendCorrectRun").on('click', function(e){
-        const rowId = $(this).closest("tr").attr("id")
-
+    $("tr #rejectInvalidRun").on('click', function(e){
+        document.rowId = $(this).closest("tr").attr("id")
         //get_url(ApiURL.COMMON_URL, `newStatus=1&runId=${rowId}&action=updateRunStatus`);
+    })
+
+    $("#validateReject").on('click', function(e)
+    {
+        let comValue = $("#rejectionCom").val()
+        if(comValue.length != 0)
+        {
+            const isRejectionOK = get_url(ApiURL.COMMON_URL, `newStatus=2&runId=${document.rowId}&rejectionCom=${comValue}&action=updateRunStatus`);
+            console.log(isRejectionOK)
+            if(isRejectionOK['status'] == "ok")
+            {
+                new Notification(`Trajet n°${document.rowId} refusé`, new NotificationTypes().Success)
+                $("#waitingRunsTable").children(`#${document.rowId}`).hide()
+            }
+            else
+            {
+                new Notification("Une erreur est survenue", new NotificationTypes().Error)
+            }
+            $("#rejectionCom").val("")
+        }
     })
 
 

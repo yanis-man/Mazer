@@ -165,9 +165,14 @@ function retrieveTransacHist()
 
 function updateRunStatus($data)
 {
-    $SQL = "UPDATE runs SET runs.state = ? WHERE runs.id = ?";
+    if(!isset($data['rejectionCom']))
+    {
+        $data['rejectionCom'] = null;
+    }
+    $SQL = "UPDATE runs SET runs.state = ?, runs.verification_comment = ? WHERE runs.id = ?";
     $params = array(
-        $data['newStatus'], 
+        $data['newStatus'],
+        $data['rejectionCom'], 
         $data['runId']
     );
     sendAndEx($SQL, $params);
