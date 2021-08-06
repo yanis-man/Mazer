@@ -110,27 +110,7 @@
                                                     <th>Détails</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>110</td>
-                                                    <td>Henry Cicero</td>
-                                                    <td>140</td>
-                                                    <td>16-07-21 / 19:08</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#run30" id="seeRunProofNDetails">
-                                                            <i class="fa fa-eye"></i>
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-success btn-sm icon" class="run-validation"><i class="fa fa-check" id="sendCorectRun"></i></button>
-                                                        <button class="btn btn-danger btn-sm icon" data-bs-toggle="modal" data-bs-target="#rejectionModal"><i class="fa fa-times" id="rejectInvalidRun"></i></button>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#border-less" id="seeRunProofNDetails">
-                                                            <i class="fa fa-eye"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
+                                            <tbody id="waitingRunsTableBody">
                                             </tbody>
                                         </table>
                                     </div>
@@ -306,7 +286,7 @@
     <!-- Js Module -->
     <script src="assets/js/scripts/Models/User.js" type="module"></script>
     <script src="assets/js/scripts/Notifications/Notifications.js" type="module"></script>
-    <script src="assets/js/scripts/Runs/Run.js" type="module"></script>
+    <script src="assets/js/scripts/Runs/RunManager.js" type="module"></script>
     <script src="assets/js/scripts/Models/Modal/Modal.js" type="module"></script>
 
     <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
@@ -315,6 +295,7 @@
         // Simple Datatable
         let table1 = document.querySelector('#waitingRunsTable');
         let dataTable = new simpleDatatables.DataTable(table1);
+        let k = "okok"
     </script>
 </body>
 

@@ -2,18 +2,29 @@ import User from './Models/User.js'
 import Modal from './Models/Modal/Modal.js'
 import {get_url, getNumberOfWeek} from './utils.js'
 
+import { RunManager } from "./Runs/RunManager";
 
 import {ApiURL} from '../CONFIG.js'
 
 import {Notification, NotificationTypes} from './Notifications/Notifications.js'
 
-$(function()
+
+$( window ).bind('beforeunload', function()
+ {
+   document.getElementById('modal-destination').innerHTML = ""
+});
+
+
+$(async function()
 {
     //Useful variables
     let doEmployeeAttributionHided = true;
     $('#employeesList').hide();
     $("#setReccurrentTransaction").hide();
-    
+
+    //Run Manager
+    window.RM = new RunManager(document);
+    window.RM.displayWaitingRuns();
 
     //Generate a modal for the rejection function
     const rejectionModal = new Modal(document, "modal-destination", "Informations de rejet")
@@ -26,7 +37,7 @@ $(function()
     $("#weekNum").html(getNumberOfWeek());
 
     const userToken = localStorage.getItem('authToken');
-    if(userToken)
+    if(userToken && !document.User)
     {
         const data = get_url(ApiURL.AUTH_URL, "userAuthToken="+userToken+"&action=get_user_info")
 
@@ -37,48 +48,6 @@ $(function()
     {
         //redirect to the login page
     }
-
-    //Load all runs which needs to be validated
-    const waitingRuns = get_url(ApiURL.COMMON_URL, "action=retrieveWaitingRuns")['data'];
-    waitingRuns.forEach(run =>{
-        $("#waitingRunsTable").append(
-            `<tr id="${run['run_id']}">`+
-                `<td>${run['run_id']}</td>`+
-                `<td>${run['driver_name']}</td>`+
-                `<td>${run['amount']}</td>`+
-                `<td>${run['date']}</td>`+
-                `<td>`+
-                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#run${run['run_id']}" id="seeRunProofNDetails">`+
-                        `<i class="fa fa-eye"></i>`+
-                    `</button>`+
-                `</td><td>`+
-                    `<button class="btn btn-success btn-sm icon" id="sendCorrectRun"><i class="fa fa-check"></i></button>`+
-                    `<button class="btn btn-danger btn-sm icon" id="rejectInvalidRun" data-bs-toggle="modal" data-bs-target="#rejectionModal"><i class="fa fa-times"></i></button>`+
-                `</td> <td>`+
-                    `<button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#details${run['run_id']}" id="seeDetails">`+
-                        `<i class="fa fa-eye"></i>`+
-                    `</button>`+
-                `</td></tr>`
-        )
-        //Generating modal used to display the run's proof.
-        let proofmodal = new Modal(document, "modal-destination","Preuve du trajet");
-        proofmodal.updateId(`run${run['run_id']}`)
-        proofmodal.addImage(run['proof'])
-        proofmodal.display()
-        
-        //Generate modal for run's details
-        let detailsModal = new Modal(document, "modal-destination", "Détails du trajet");
-        detailsModal.updateId(`details${run['run_id']}`)
-        detailsModal.addText(
-            '<strong>Informations du véhicule</strong><br/>'+
-            `Type : ${run['vehicle_name']} <br/>`+
-            `Plaque : ${run['plate']} <br>`+
-            '<strong>Commentaire</strong><br/>'+
-            `${(run['comment'] ? run['comment'] : "Aucun")} <br/>`+
-            `<strong>Lié à la semaine n°${run['week_num']}</strong><br/>`
-            )
-        detailsModal.display()
-    })
     //detect if the radio is checked to display employee list
     $("#setToAnEmployee").on('change', function(e)
     {
@@ -221,29 +190,10 @@ $(function()
 
         }
     })
-    $("tr #rejectInvalidRun").on('click', function(e){
-        document.rowId = $(this).closest("tr").attr("id")
-        //get_url(ApiURL.COMMON_URL, `newStatus=1&runId=${rowId}&action=updateRunStatus`);
-    })
 
     $("#validateReject").on('click', function(e)
     {
-        let comValue = $("#rejectionCom").val()
-        if(comValue.length != 0)
-        {
-            const isRejectionOK = get_url(ApiURL.COMMON_URL, `newStatus=2&runId=${document.rowId}&rejectionCom=${comValue}&action=updateRunStatus`);
-            console.log(isRejectionOK)
-            if(isRejectionOK['status'] == "ok")
-            {
-                new Notification(`Trajet n°${document.rowId} refusé`, new NotificationTypes().Success)
-                $("#waitingRunsTable").children(`#${document.rowId}`).hide()
-            }
-            else
-            {
-                new Notification("Une erreur est survenue", new NotificationTypes().Error)
-            }
-            $("#rejectionCom").val("")
-        }
+        window.RM.rejectRun(window.rejectId)
     })
 
 

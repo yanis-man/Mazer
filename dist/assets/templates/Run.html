@@ -1,0 +1,24 @@
+<tr id="{{run_id}}">
+    <td>{{run_id}}</td>
+    <td>{{driver_name}}</td>
+    <td>{{amount}}</td>
+    <td>{{date}}</td>
+    <td>
+        <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#run{{run_id}}" id="seeRunProofNDetails">
+             <i class="fa fa-eye"></i>
+         </button>
+     </td>
+     <td>
+        <button class="btn btn-success btn-sm icon" id="sendCorrectRun" onclick="window.RM.acceptRun( '{{run_id}}' )">
+             <i class="fa fa-check"></i>
+        </button>  
+         <button class="btn btn-danger btn-sm icon" id="rejectInvalidRun" onclick="window.rejectId = document.getElementById('rejectInvalidRun').closest('tr').getAttribute('id')" data-bs-toggle="modal" data-bs-target="#rejectionModal">
+             <i class="fa fa-times"></i>
+        </button>  
+     </td>
+     <td>  
+         <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#details{{run_id}}" id="seeDetails">  
+             <i class="fa fa-eye"></i>  
+         </button>  
+     </td>
+</tr>
