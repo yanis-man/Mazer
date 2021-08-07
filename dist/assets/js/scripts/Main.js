@@ -1,4 +1,5 @@
 import User from './Models/User.js'
+import Compagny from './Models/Compagny.js'
 import Modal from './Models/Modal/Modal.js'
 import {get_url, getNumberOfWeek} from './utils.js'
 
@@ -26,6 +27,9 @@ $(async function()
     window.RM = new RunManager(document);
     window.RM.displayWaitingRuns();
 
+    document.Compagny = new Compagny();
+    document.Compagny.update_display(document)
+    localStorage.setItem('Compagny', JSON.stringify(document.Compagny))
     //Generate a modal for the rejection function
     const rejectionModal = new Modal(document, "modal-destination", "Informations de rejet")
     rejectionModal.updateId("rejectionModal")
@@ -42,11 +46,13 @@ $(async function()
         const data = get_url(ApiURL.AUTH_URL, "userAuthToken="+userToken+"&action=get_user_info")
 
         document.User = new User(data);
+        localStorage.setItem('User', JSON.stringify(document.User))
         document.User.update_display(document);
     }
     else
     {
         //redirect to the login page
+    
     }
     //detect if the radio is checked to display employee list
     $("#setToAnEmployee").on('change', function(e)
