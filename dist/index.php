@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <h6 class="text-muted font-semibold">Chiffre d'affaire</h6>
-                                                <h6 class="font-extrabold mb-0">$ <span>1452.00</span></h6>
+                                                <h6 class="font-extrabold mb-0">$ <span id="comp_to"></span></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -285,6 +285,7 @@
 
     <!-- Js Module -->
     <script src="assets/js/scripts/Models/User.js" type="module"></script>
+    <script src="assets/js/scripts/Models/Compagny.js" type="module"></script>
     <script src="assets/js/scripts/Notifications/Notifications.js" type="module"></script>
     <script src="assets/js/scripts/Runs/RunManager.js" type="module"></script>
     <script src="assets/js/scripts/Models/Modal/Modal.js" type="module"></script>
